@@ -1,0 +1,21 @@
+version: '3'
+services:
+  ContainerA:
+    build:
+      context: ./ContainerA
+    environment:
+      INTERVAL: 300  # Belirli bir periyot süresi (saniye cinsinden)
+    depends_on:
+      - ContainerC
+
+  ContainerB:
+    build:
+      context: ./ContainerB
+    ports:
+      - "80:80"
+    depends_on:
+      - ContainerC
+
+  ContainerC:
+    image: "rabbitmq:3-management"
+

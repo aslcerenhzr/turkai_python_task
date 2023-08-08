@@ -4,8 +4,11 @@ connection = psycopg2.connect(
     database="mydb",
     user="turkai",
 ) 
-
-with open("/home/turkai/Desktop/asliceren/TurkAI_pythonTask/redNotices_data.txt", "r") as file:
+    
+with open("/home/turkai/Desktop/turkai_python_task/TurkAI_pythonTask/ContainerA/redNotices_data.txt", "r") as file:
+    with connection.cursor() as cursor:
+        cursor.execute("DELETE FROM rednotice_db;")
+    
     lines = file.readlines()
     for line in lines:
         parts = line.strip().split(", ")
@@ -19,5 +22,5 @@ with open("/home/turkai/Desktop/asliceren/TurkAI_pythonTask/redNotices_data.txt"
             cursor.execute(insert_query)
         
         connection.commit()
-
+        
 connection.close()
