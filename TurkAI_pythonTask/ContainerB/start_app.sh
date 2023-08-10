@@ -1,5 +1,17 @@
-echo "Running connect_db.py" &
+#!/bin/bash
 
-echo "Running app.py" &
+# Başlangıç mesajı
+echo "Başliyor..."
 
+# Veritabanı bağlantısını başlat
+python connect_db.py
+# Veritabanı bağlantısının tamamlanmasını beklemek
 wait
+
+# Uygulamayı başlat
+python app.py
+# Uygulamanın tamamlanmasını beklemek
+wait
+
+# Tamamlandı mesajı
+echo "Tamamlandi."

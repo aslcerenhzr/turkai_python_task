@@ -2,21 +2,25 @@
 FROM python:3.9
 
 # Set working directory
-WORKDIR /turkai_python_task/TurkAI_pythonTask/ContainerB
+WORKDIR /app
 
 # Copy requirements file
-COPY ContainerB/requirements.txt 
+COPY requirements.txt /app/
 
 # Install dependencies
-RUN pip install -r requirements.txt
+RUN pip install -r /app/requirements.txt
 
 # Copy application code
-COPY ContainerB/connect_db.py
-COPY ContainerB/myflaskapp/app.py
-COPY ContainerB/myflaskapp/templates/index.html
+COPY connect_db.py /app/
+COPY myflaskapp/app.py /app/
+COPY myflaskapp/templates/index.html /app/myflaskapp/templates/
+COPY start_app.sh /app/
+
+
+RUN chmod +x /app/start_app.sh
 
 # Expose port for web server
 EXPOSE 80
 
 # Run the application
-CMD ["./start_app.sh"]
+CMD ["/app/start_app.sh"]

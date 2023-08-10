@@ -1,30 +1,49 @@
 from selenium import webdriver
 from selenium.webdriver.common.by import By
+from selenium.webdriver.chrome.options import Options
 import time
+import pika
+
+chrome_options = Options()
+chrome_options.add_argument("--headless")
+chrome_options.add_argument("--no-sandbox")
 
 def findRedNotices():
-    browser = webdriver.Chrome() 
+    browser = webdriver.Chrome(options=chrome_options) 
     browser.get("https://www.interpol.int/How-we-work/Notices/Red-Notices/View-Red-Notices")
     time.sleep(1)
     
-    redNotices_name = []
+    redNotices_data = []
     
     names = browser.find_elements(By.CLASS_NAME, "redNoticeItem__labelLink")
-    for name in names:
-        temp = name.text.replace("\n","")
-        redNotices_name.append(temp)
+    ages = browser.find_elements(By.CLASS_NAME, "age")
+    nationalities = browser.find_elements(By.CLASS_NAME, "nationalities")
     
-    redNotices_ages = browser.find_elements(By.CLASS_NAME, "age")
-    redNotices_nationalities = browser.find_elements(By.CLASS_NAME, "nationalities")
-    
-    list = zip(redNotices_name, redNotices_ages,redNotices_nationalities)
-    
-    for name_element, age_element, nation_element in list:
-        with open("TurkAI_pythonTask/ContainerA/redNotices_data.txt", "a", encoding="utf-8") as file:
-            file.write(f"Name: {name_element}, Age: {age_element.text}, Nationalities: {nation_element.text}\n")  
+    for name_element, age_element, nation_element in zip(names, ages, nationalities):
+        name = name_element.text.replace("\n", "")
+        age = age_element.text
+        nationality = nation_element.text
+        redNotices_data.append({"Name": name, "Age": age, "Nationalities": nationality})
     
     browser.quit()
+    return redNotices_data
+
+def send_to_rabbitmq(data):
+    connection = pika.BlockingConnection(pika.ConnectionParameters(host='container_c'))
+    channel = connection.channel()
+    channel.queue_declare(queue='interpol_queue', durable=True)
     
-with open("TurkAI_pythonTask/ContainerA/redNotices_data.txt", 'w') as file:
-    file.write('')   
-findRedNotices()
+    for item in data:
+        channel.basic_publish(exchange='',
+                              routing_key='interpol_queue',
+                              body=str(item),
+                              properties=pika.BasicProperties(
+                                  delivery_mode=2,  # Veriyi kalıcı olarak kuyruğa ekle
+                              ))
+        print(f"Veri kuyruğa eklendi: {item}")
+    
+    connection.close()
+
+if __name__ == "__main__":
+    redNotices_data = findRedNotices()
+    send_to_rabbitmq(redNotices_data)
