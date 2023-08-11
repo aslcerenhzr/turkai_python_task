@@ -4,18 +4,20 @@ services:
   container_b:
     build:
       context: ./ContainerB
-    ports: 
-      - "80:80"
+    ports:
+      - "8081:80"
+    depends_on:
+      - container_a
+      - container_c
+
+  container_a:
+    build:
+      context: ./ContainerA
+    environment:
+      INTERVAL: 300
     depends_on:
       - container_c
 
   container_c:
-    image: "rabbitmq:3-management"
-    depends_on:
-      - container_a
-
-  container_a: 
     build:
-      context: ./ContainerA
-    environment:
-      INTERVAL: 300  # Belirli bir periyot süresi (saniye cinsinden)
+      context: ./ContainerC # Replace with the actual build context for ContainerC

@@ -29,7 +29,7 @@ def findRedNotices():
     return redNotices_data
 
 def send_to_rabbitmq(data):
-    connection = pika.BlockingConnection(pika.ConnectionParameters(host='container_c'))
+    connection = pika.BlockingConnection(pika.ConnectionParameters(host='rmq'))
     channel = connection.channel()
     channel.queue_declare(queue='interpol_queue', durable=True)
     

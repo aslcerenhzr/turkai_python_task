@@ -1,7 +1,6 @@
 import pika
 import psycopg2
 
-
 def process_data(data):
     # Implement this function to process the data and return processed_data
     # For now, let's assume it just returns the data as-is
@@ -38,7 +37,7 @@ def save_to_database(data):
         connection.close()
 
 # Kuyruğa bağlan
-connection = pika.BlockingConnection(pika.ConnectionParameters(host='container_c', virtual_host='/', credentials=pika.PlainCredentials('guest', 'guest')))
+connection = pika.BlockingConnection(pika.ConnectionParameters(host='rmq'))
 channel = connection.channel()
 channel.queue_declare(queue='interpol_queue', durable=True)
 
