@@ -1,23 +1,19 @@
 #!/bin/bash
-
-# Başlangıç mesajı
-echo "Başliyor..."
-
-# Start PostgreSQL service
+sleep 20
+# PostgreSQL servisini başlat
 service postgresql start
-su postgres 
+
+# PostgreSQL kullanıcısına geç
+su postgres <<EOF
 psql -U postgres -c "create database mydb;"
-psql -U postgres -c "alter user guest password 'guest';"
+psql -U postgres -c "alter user postgres password 'postgres';"
+EOF
 
-# Veritabanı bağlantısını başlat
-python connect_db.py
-# Veritabanı bağlantısının tamamlanmasını beklemek
+# Veritabanı bağlantısını başlatmak için Python komutu (ve port numarası parametresi)
+python connect_db.py  --database_host localhost --database_port 5432
 wait
 
-# Uygulamayı başlat
-python app.py
-# Uygulamanın tamamlanmasını beklemek
-wait
+# Uygulamayı başlatmak için Python komutu 
+python app.py 
 
-# Tamamlandı mesajı
-echo "Tamamlandi."
+# Bash betiği burada sona erer
