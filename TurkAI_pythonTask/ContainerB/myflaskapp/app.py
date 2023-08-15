@@ -6,7 +6,8 @@ app = Flask(__name__)
 # PostgreSQL bağlantısı
 conn = psycopg2.connect(
     database="mydb",
-    user="turkai",
+    user="postgres",
+    password="postgres",
 )
 
 @app.route("/")

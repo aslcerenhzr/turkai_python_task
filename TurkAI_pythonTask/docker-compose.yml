@@ -20,4 +20,7 @@ services:
 
   container_c:
     build:
-      context: ./ContainerC # Replace with the actual build context for ContainerC
+      context: ./ContainerC
+    ports:
+    - "5671:5672"
+    - "15672:15672"
