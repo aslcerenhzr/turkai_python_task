@@ -1,19 +1,15 @@
 #!/bin/bash
-sleep 20
+sleep 10
+
 # PostgreSQL servisini başlat
 service postgresql start
 
 # PostgreSQL kullanıcısına geç
-su postgres <<EOF
-psql -U postgres -c "create database mydb;"
-psql -U postgres -c "alter user postgres password 'postgres';"
-EOF
+su postgres -c "psql -U postgres -c \"create database mydb;\""
+su postgres -c "psql -U postgres -c \"alter user postgres password 'postgres';\""
 
-# Veritabanı bağlantısını başlatmak için Python komutu (ve port numarası parametresi)
-python connect_db.py  --database_host localhost --database_port 5432
+python /app/connect_db.py
 wait
 
-# Uygulamayı başlatmak için Python komutu 
-python app.py 
+python /app/myflaskapp/app.py 
 
-# Bash betiği burada sona erer

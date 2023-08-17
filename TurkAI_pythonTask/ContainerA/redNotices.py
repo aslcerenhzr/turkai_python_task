@@ -41,7 +41,7 @@ def send_to_rabbitmq(data):
                                   delivery_mode=2,  # Veriyi kalıcı olarak kuyruğa ekle
                               ))
         print(f"Veri kuyruğa eklendi: {item}")
-    
+
     connection.close()
 
 if __name__ == "__main__":
