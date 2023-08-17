@@ -16,7 +16,6 @@ services:
     depends_on:
       - container_a
       - container_c
-    restart: on-failure
 
   container_c:
     image: container_c:latest

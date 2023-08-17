@@ -8,6 +8,8 @@ chrome_options = Options()
 chrome_options.add_argument("--headless")
 chrome_options.add_argument("--no-sandbox")
 
+time.sleep(5)
+
 def findRedNotices():
     browser = webdriver.Chrome(options=chrome_options) 
     browser.get("https://www.interpol.int/How-we-work/Notices/Red-Notices/View-Red-Notices")
