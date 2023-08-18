@@ -11,13 +11,7 @@ def callback(ch, method, properties, body):
     name = data.get("Name")
     age = data.get("Age")
     nationality = data.get("Nationalities")
-    
-    # Gelen veriyi print et
-    print("Received Data:", flush=True)
-    print("Name:", name, flush=True)
-    print("Age:", age, flush=True)
-    print("Nationality:", nationality, flush=True)
-    
+       
     i+=1
     if i==20:
         ch.stop_consuming()     
@@ -35,8 +29,9 @@ connection = psycopg2.connect(
     host="localhost",
     port="5432"
 )
+
 pg_cursor = connection.cursor()
-pg_cursor.execute("CREATE TABLE IF NOT EXISTS rednotice_db (namesurname VARCHAR(100), age VARCHAR(100), nationalities VARCHAR(100));")
+pg_cursor.execute("CREATE TABLE IF NOT EXISTS rednotice_db (ID SERIAL PRIMARY KEY, namesurname VARCHAR(100), age VARCHAR(100), nationalities VARCHAR(100));")
 connection.commit()
 
 # RabbitMQ bağlantısı
@@ -45,11 +40,8 @@ channel = rabbitmq_connection.channel()
 channel.queue_declare(queue='interpol_queue', durable=True)
 channel.basic_consume(queue='interpol_queue', on_message_callback=callback, auto_ack=True)
 
-
-print("Start consuming messages...")
 channel.start_consuming()
 
-print("Finished consuming messages.")
 rabbitmq_connection.close()
 pg_cursor.close()
 connection.close()
