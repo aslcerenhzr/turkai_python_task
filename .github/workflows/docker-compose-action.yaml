@@ -1,15 +1,29 @@
-name: Run Docker Compose
+version: '3'
+services:
 
-on:
-  schedule:
-    - cron: '0 * * * *' 
+  container_a:
+    image: container_a:latest
+    environment:
+      INTERVAL: 300
+    depends_on:
+      - container_c
+    restart: on-failure
 
-jobs:
-  build:
-    runs-on: ubuntu-latest
+  container_b:
+    image: container_b:latest
+    ports:
+      - "8080:5000"
+    depends_on:
+      - container_a
+      - container_c
 
-    steps:
-      - uses: actions/checkout@v3
+  container_c:
+    image: container_c:latest
+    ports:
+    - "15672:15672"
 
-      - name: Run Docker Compose
-        run: docker-compose -f docker-compose.yaml up -d
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:15672"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
