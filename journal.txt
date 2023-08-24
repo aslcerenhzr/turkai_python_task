@@ -1,0 +1,78 @@
+Gün 1: HTML and CSS Fundamentals
+I became familiar with HTML  structure.
+I learned how to style web pages by using CSS.
+
+Gün 2: Python Basics and Nesne Tabanlı Programlama
+I spent the day reviewing my Python fundamentals.
+I studied the concept of object-oriented programming.
+
+Gün 3: Web Scraping with Beautiful Soup
+I focused on web scraping techniques using Beautiful Soup.
+I practiced navigating through HTML structures, targeting elements, and retrieving relevant data.
+
+Gün 4: Using Selenium to Automate Web Interaction
+I started using Selenium to automate online interactions.
+I learned how to interact with web elements, and perform tasks like filling out forms programmatically.
+
+Gün 5: Data Analysis with NumPy and Pandas
+I experimented with data manipulation and used NumPy to carry out simple statistical calculations.
+I then looked into Pandas and learned about its features.
+
+Gün 6: Data Visualization with Matplotlib
+I became good at Matplotlib.
+I learned how to create various types of plots, customize their appearance, and present data insights graphically.
+
+Gün 7: Working with MySQL Databases
+I gained an understanding of relational databases, learned how to create tables, insert data, 
+and perform queries on MySQL database.
+
+Gün 8: Learning Git Commands and GitHub
+I started using GitHub and Git for version control today. 
+I became familiar with the Git commands used for branching, committing, and staging changes
+
+Gün 9: Docker Fundamentals and Docker Volumes
+I studied Docker's fundamentals and learning how to create, run, and manage containers.
+
+Gün 10: Docker Network, Compose, and Swarm Training
+I took a deep dive into advanced Docker topics. I 
+learned about Docker network, Compose and Swarm provided insights into containerization and orchestration.
+
+Gün 11: Requirement Analysis and Initial Task Setup
+I took on my first real task today. I began by analyzing the requirements. 
+firstly, I used Selenium to collect data extraction.
+
+Gün 12: Working with PostgreSQL and Data Migration
+I set up a PostgreSQL database, created tables, and successfully migrated the data I collected using Selenium.
+
+Gün 13: Creating an HTML Web Page and Integrating Data
+I created a basic HTML web page and used Flask to integrate the data I collected through Python.
+
+Gün 14: Dockerizing the Project with Containers
+I focused on containerization. 
+I created Docker containers for the project components and wrote Dockerfiles to define their configurations.
+
+Gün 15: Docker Network Troubleshooting
+I ran into issues with Docker. 
+My time was spent debugging and fixing issues among containers.
+
+Gün 16: Exploring RabbitMQ
+Today was an introduction to RabbitMQ. 
+I learned about message queuing and its importance in distributed systems.
+
+Gün 17: Integrating RabbitMQ into the Project
+I used what I learned about RabbitMQ today. 
+Adding message queuing into the project added a new layer of communication between components.
+
+Gün 18: Writing README.md and Code Documentation
+Today, I focused on documenting the project. 
+I wrote a detailed README.md file that explains the purpose of the project, and how to use it. 
+I spent the time to adding comments to my code, making it easier to read.
+
+Gün 19: Implementing Feedback and Refining Code
+Feedback from my supervisor arrived, 
+and I worked on the needed coding changes all day.
+
+Gün 20: Finalizing and Delivering the Project
+The project is finally finished.
+I made sure the project matched all the initial requirements by running thorough testing and verifying 
+the functioning of all components. I submitted the final product.

@@ -26,7 +26,7 @@ def index():
     cursor = connection.cursor()
     
     # Execute an SQL query to fetch data from the 'rednotice_db' table
-    cursor.execute("SELECT * FROM rednotice_db")
+    cursor.execute("SELECT * FROM rednotice_db LIMIT 20")
     data = cursor.fetchall()
     
     # Commit the transaction and close the cursor
